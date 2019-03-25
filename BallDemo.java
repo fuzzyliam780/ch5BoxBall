@@ -4,6 +4,9 @@ import java.awt.Color;
  * Class BallDemo - a short demonstration showing animation with the 
  * Canvas class. 
  *
+ * @author Liam Marquis
+ * @version 2019.03.25
+ *
  * @author Bill Crosbie
  * @version 2015-March-BB
  *
@@ -53,4 +56,27 @@ public class BallDemo
             }
         }
     }
+    
+    public void boxBounce() {
+        int northBoundary = 50,westBoundary = 50;
+        int southBoundary = 450, eastBoundary = 550;
+        BoxBall bb = new BoxBall(myCanvas,northBoundary,southBoundary,westBoundary,eastBoundary);
+        
+        
+        //create boundaries
+        myCanvas.drawLine(50, southBoundary, 550, southBoundary);
+        myCanvas.drawLine(50, northBoundary, 550, northBoundary);
+        myCanvas.drawLine(eastBoundary, 50, eastBoundary, 450);
+        myCanvas.drawLine(westBoundary, 50, westBoundary, 450);
+        
+        
+        while(true){
+            bb.move();
+            myCanvas.wait(50);
+        }
+        
+        
+    }
+    
+    
 }
