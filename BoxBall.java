@@ -10,13 +10,14 @@ import java.util.Random;
 public class BoxBall
 {
     // instance variables
+    Random rng = new Random();
     private Canvas canvas;
     private Ellipse2D.Double circle;
     private Color ballColor;
-    private int xPosition;
-    private int yPosition;
-    private int xSpeed;
-    private int ySpeed;
+    private int xPosition = rng.nextInt(40) + 1;
+    private int yPosition = rng.nextInt(60) + 1;
+    private int xSpeed = rng.nextInt(20) + 1;
+    private int ySpeed = rng.nextInt(20) + 1;
     private int ballDiameter;
     private final int northBoundary;
     private final int southBoundary;
@@ -69,40 +70,41 @@ public class BoxBall
      * @return    the sum of x and y
      */
     public void move() {
-        Random rng = new Random();
         erase();
-        
-        xSpeed = rng.nextInt(20) + 1;
-        ySpeed = rng.nextInt(20) + 1;
         
         xPosition += xSpeed;
         yPosition += ySpeed;
         
         //set north boundary
-        if (yPosition >= (northBoundary - ballDiameter)) {
-            yPosition = northBoundary - ballDiameter;
-            ySpeed = -ySpeed;
+        //if (yPosition - ySpeed <= -20) {
+        if (yPosition - ballDiameter <= -50) {
+            yPosition = -50 + ballDiameter;
+            xPosition += xSpeed;
+            ySpeed = ySpeed *-1;
         
         }
         
         //set south boundary
-        if (yPosition >= (southBoundary - ballDiameter)) {
-            yPosition = southBoundary - ballDiameter;
-            ySpeed = -ySpeed;
+        if (yPosition + ballDiameter >= 500) {
+            yPosition = 500 - ballDiameter;
+            xPosition += xSpeed;
+            ySpeed = ySpeed *-1;
         
         }
         
         //set west boundary
-        if (xPosition >= (westBoundary - ballDiameter)) {
-            xPosition = westBoundary - ballDiameter;
-            xSpeed = -xSpeed;
+        if (xPosition - ballDiameter <= -50) {
+            xPosition = -50 + ballDiameter;
+            yPosition += ySpeed;
+            xSpeed = xSpeed *-1;
         
         }
         
         //set east boundary
-        if (xPosition >= (eastBoundary - ballDiameter)) {
-            xPosition = eastBoundary - ballDiameter;
-            xSpeed = -xSpeed;
+        if (xPosition + ballDiameter > 600) {
+            xPosition = 600 - ballDiameter;
+            yPosition += ySpeed;
+            xSpeed = xSpeed *-1;
         
         }
         

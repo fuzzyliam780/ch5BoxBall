@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Class BallDemo - a short demonstration showing animation with the 
@@ -60,22 +62,18 @@ public class BallDemo
     public void boxBounce() {
         int northBoundary = 50,westBoundary = 50;
         int southBoundary = 450, eastBoundary = 550;
-        BoxBall bb = new BoxBall(myCanvas,northBoundary,southBoundary,westBoundary,eastBoundary);
-        
-        
-        //create boundaries
-        myCanvas.drawLine(50, southBoundary, 550, southBoundary);
-        myCanvas.drawLine(50, northBoundary, 550, northBoundary);
-        myCanvas.drawLine(eastBoundary, 50, eastBoundary, 450);
-        myCanvas.drawLine(westBoundary, 50, westBoundary, 450);
-        
-        
-        while(true){
-            bb.move();
-            myCanvas.wait(50);
+        ArrayList<BoxBall> balls = new ArrayList<>();
+        Random rng = new Random();
+        for (int i = 0; i<rng.nextInt(25)+2;i++){
+            BoxBall bb = new BoxBall(myCanvas,northBoundary,southBoundary,westBoundary,eastBoundary);
+            balls.add(bb);
         }
-        
-        
+        while(true){
+            for(BoxBall boxball : balls){
+                boxball.move();
+            }
+            myCanvas.wait(40);
+        }
     }
     
     
