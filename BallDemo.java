@@ -7,7 +7,7 @@ import java.util.Random;
  * Canvas class. 
  *
  * @author Liam Marquis
- * @version 2019.03.25
+ * @version 2019.03.26
  *
  * @author Bill Crosbie
  * @version 2015-March-BB
@@ -59,13 +59,16 @@ public class BallDemo
         }
     }
     
+    /**
+     * Simulate up to 27 balls bouncing off the walls of the canvas
+     */
     public void boxBounce() {
         int northBoundary = 50,westBoundary = 50;
         int southBoundary = 450, eastBoundary = 550;
         ArrayList<BoxBall> balls = new ArrayList<>();
         Random rng = new Random();
         for (int i = 0; i<rng.nextInt(25)+2;i++){
-            BoxBall bb = new BoxBall(myCanvas,northBoundary,southBoundary,westBoundary,eastBoundary);
+            BoxBall bb = new BoxBall(myCanvas);
             balls.add(bb);
         }
         while(true){

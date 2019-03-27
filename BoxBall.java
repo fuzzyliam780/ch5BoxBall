@@ -5,7 +5,7 @@ import java.util.Random;
  * Write a description of class BoxBall here.
  *
  * @author Liam Marquis
- * @version 2019.3.25
+ * @version 2019.3.26
  */
 public class BoxBall
 {
@@ -14,35 +14,25 @@ public class BoxBall
     private Canvas canvas;
     private Ellipse2D.Double circle;
     private Color ballColor;
-    private int xPosition = rng.nextInt(40) + 1;
-    private int yPosition = rng.nextInt(60) + 1;
-    private int xSpeed = rng.nextInt(20) + 1;
-    private int ySpeed = rng.nextInt(20) + 1;
+    private int xPosition;// = rng.nextInt(40) + 1;
+    private int yPosition;// = rng.nextInt(60) + 1;
+    private int xSpeed;
+    private int ySpeed;
     private int ballDiameter;
-    private final int northBoundary;
-    private final int southBoundary;
-    private final int westBoundary;
-    private final int eastBoundary;
 
     /**
      * Constructor for objects of class BoxBall
      *
      * @param drawingCanvas  the canvas to draw this ball on
-     * @param northBoundary  the position of the north boundary (where the wall will bounce)
-     * @param southBoundary  the position of the south boundary (where the wall will bounce)
-     * @param westBoundary  the position of the west boundary (where the wall will bounce)
-     * @param eastBoundary  the position of the east boundary (where the wall will bounce)
      */
-    public BoxBall(Canvas drawingCanvas, int northBoundary,int southBoundary,int westBoundary,int eastBoundary) {
+    public BoxBall(Canvas drawingCanvas) {
         Random rng = new Random();
         canvas = drawingCanvas;
-        this.northBoundary = northBoundary;
-        this.southBoundary = southBoundary;
-        this.westBoundary = westBoundary;
-        this.eastBoundary = eastBoundary;
         ballDiameter = rng.nextInt(25) + 25;
         xPosition = (rng.nextInt(401) + 50)-ballDiameter;
         yPosition = (rng.nextInt(501) + 50)-ballDiameter;
+        xSpeed = rng.nextInt(20) + 1;
+        ySpeed = rng.nextInt(20) + 1;
         ballColor = new Color(rng.nextInt(256),rng.nextInt(256),rng.nextInt(256));
     }
 
@@ -64,10 +54,7 @@ public class BoxBall
     }   
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Move this ball according to its position and speed and redraw
      */
     public void move() {
         erase();
@@ -77,8 +64,8 @@ public class BoxBall
         
         //set north boundary
         //if (yPosition - ySpeed <= -20) {
-        if (yPosition - ballDiameter <= -50) {
-            yPosition = -50 + ballDiameter;
+        if (yPosition - ballDiameter <= -40) {
+            yPosition = -40 + ballDiameter;
             xPosition += xSpeed;
             ySpeed = ySpeed *-1;
         
@@ -93,8 +80,8 @@ public class BoxBall
         }
         
         //set west boundary
-        if (xPosition - ballDiameter <= -50) {
-            xPosition = -50 + ballDiameter;
+        if (xPosition - ballDiameter <= -40) {
+            xPosition = -40 + ballDiameter;
             yPosition += ySpeed;
             xSpeed = xSpeed *-1;
         
